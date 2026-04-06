@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coca-Cola Vanilla | Taste the Smooth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --coca-red: #E61A27;
+      --coca-dark-red: #B5121B;
+      --vanilla-cream: #F5E6D3;
+      --vanilla-gold: #D4A574;
+      --vanilla-dark: #8B6914;
+      --black: #0A0A0A;
+      --white: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--black) 0%, #1a0a0a 50%, var(--coca-dark-red) 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 30% 50%, rgba(230, 26, 39, 0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 30%, rgba(212, 165, 116, 0.2) 0%, transparent 50%);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlow {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 24px;
+      border: 1px solid var(--vanilla-gold);
+      border-radius: 980px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--vanilla-gold);
+      margin-bottom: 32px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    .hero-title .vanilla {
+      color: var(--vanilla-gold);
+      display: block;
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 48px;
+      animation: fadeInUp 1s ease-out 0.7s both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 40px;
+      background: var(--coca-red);
+      color: white;
+      text-decoration: none;
+      border-radius: 980px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+
+    .hero-cta:hover {
+      background: var(--coca-dark-red);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '↓';
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ===== PRODUCT SHOWCASE ===== */
+    .showcase {
+      position: relative;
+      padding: 120px 0;
+      background: linear-gradient(180deg, var(--black) 0%, #0f0808 100%);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (max-width: 768px) {
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-card {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+      background: var(--black);
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px;
+      z-index: 2;
+    }
+
+    .card-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.2;
+      position: absolute;
+      top: 24px;
+      right: 32px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card-description {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .card-icon {
+      font-size: 4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      z-index: 2;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+    }
+
+    /* ===== EXPERIENCE SECTION ===== */
+    .experience {
+      padding: 160px 0;
+      background: var(--vanilla-cream);
+      color: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .experience::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 165, 116, 0.3), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .experience-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coca-red);
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+      max-width: 800px;
+    }
+
+    .section-title .highlight {
+      color: var(--coca-red);
+    }
+
+    .section-text {
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(10, 10, 10, 0.7);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 80px;
+    }
+
+    @media (max-width: 768px) {
+      .features {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .feature-text {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(10, 10, 10, 0.6);
+    }
+
+    /* ===== CINEMATIC SECTION ===== */
+    .cinematic {
+      position: relative;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--coca-dark-red), var(--black));
+      overflow: hidden;
+    }
+
+    .cinematic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(212, 165, 116, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(230, 26, 39, 0.3) 0%, transparent 50%);
+      animation: cinematicGlow 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes cinematicGlow {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .cinematic-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 24px;
+    }
+
+    .cinematic-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.3;
+      margin-bottom: 32px;
+    }
+
+    .cinematic-quote .gold {
+      color: var(--vanilla-gold);
+    }
+
+    .cinematic-author {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 160px 0;
+      background: var(--black);
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .cta-title .vanilla {
+      color: var(--vanilla-gold);
+      font-style: italic;
+    }
+
+    .cta-text {
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 48px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 48px;
+      background: var(--coca-red);
+      color: white;
+      text-decoration: none;
+      border-radius: 980px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--coca-dark-red);
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 48px;
+      background: transparent;
+      color: white;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 980px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--vanilla-gold);
+      color: var(--vanilla-gold);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 60px 0;
+      background: #050505;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo .red {
+      color: var(--coca-red);
+    }
+
+    .footer-text {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ===== ANIMATIONS ON SCROLL ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== FLOATING BUBBLES ===== */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: 20px;
+      height: 20px;
+      background: rgba(212, 165, 116, 0.1);
+      border-radius: 50%;
+      animation: float 15s infinite;
+    }
+
+    .bubble:nth-child(1) { left: 10%; animation-delay: 0s; width: 15px; height: 15px; }
+    .bubble:nth-child(2) { left: 25%; animation-delay: 2s; width: 25px; height: 25px; }
+    .bubble:nth-child(3) { left: 40%; animation-delay: 4s; width: 10px; height: 10px; }
+    .bubble:nth-child(4) { left: 55%; animation-delay: 1s; width: 20px; height: 20px; }
+    .bubble:nth-child(5) { left: 70%; animation-delay: 3s; width: 18px; height: 18px; }
+    .bubble:nth-child(6) { left: 85%; animation-delay: 5s; width: 12px; height: 12px; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.5; }
+      90% { opacity: 0.2; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Bubbles -->
+  <div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Yeni Lezzet</div>
+      <h1 class="hero-title">
+        Coca-Cola
+        <span class="vanilla">Vanilla</span>
+      </h1>
+      <p class="hero-subtitle">Pürüzsüz vanilya dokunuşuyla efsane lezzet. Her yudumda kadifemsi bir deneyim.</p>
+      <a href="#kesfet" class="hero-cta">
+        Keşfet ↓
+      </a>
+    </div>
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- PRODUCT SHOWCASE -->
+  <section class="showcase" id="kesfet">
+    <div class="showcase-grid">
+      <!-- Card 1: Vanilyanın Büyüleyici Dokunuşu -->
+      <div class="product-card fade-in">
+        <img src="images/Vanilyanın_Büyüleyici_Dokunuşu_version_1.png" alt="Vanilyanın Büyüleyici Dokunuşu">
+        <span class="card-number">01</span>
+        <div class="card-content">
+          <h3 class="card-title">Vanilyanın Büyüleyici Dokunuşu</h3>
+          <p class="card-description">Coca-Cola'ın ikonik tadı, Madagascar vanilyasının pürüzsüz dokunuşuyla buluşuyor.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Yazın En Serin Esintisi -->
+      <div class="product-card fade-in">
+        <img src="images/Yazın_En_Serin_Esintisi_version_1.png" alt="Yazın En Serin Esintisi">
+        <span class="card-number">02</span>
+        <div class="card-content">
+          <h3 class="card-title">Yazın En Serin Esintisi</h3>
+          <p class="card-description">Doğal vanilya özüyle zenginleştirilmiş, yumuşak ve kremamsı bir tat profili.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Buz Gibi Bir Ferahlık -->
+      <div class="product-card fade-in">
+        <img src="images/Buz_Gibi_Bir_Ferahlık_version_1.png" alt="Buz Gibi Bir Ferahlık">
+        <span class="card-number">03</span>
+        <div class="card-content">
+          <h3 class="card-title">Buz Gibi Bir Ferahlık</h3>
+          <p class="card-description">En iyi soğuk servis edilir. Buzla birlikte vanilya aroması maksimuma ulaşır.</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Gurme Bir Kaçamak -->
+      <div class="product-card fade-in">
+        <img src="images/Gurme_Bir_Kaçamak_version_1.png" alt="Gurme Bir Kaçamak">
+        <span class="card-number">04</span>
+        <div class="card-content">
+          <h3 class="card-title">Gurme Bir Kaçamak</h3>
+          <p class="card-description">Her kutu, paylaşılan anların lezzetli bir hatırasıdır. Birlikte daha güzel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience">
+    <div class="experience-content">
+      <div class="section-label fade-in">Deneyim</div>
+      <h2 class="section-title fade-in">
+        Sıradan Bir İçecek <span class="highlight">Değil.</span>
+      </h2>
+      <p class="section-text fade-in">
+        Coca-Cola Vanilla, 130 yılı aşkın lezzet mirasının modern bir yorumu. 
+        Madagascar'dan özenle toplanan vanilya çubukları, Coca-Cola'ın eşsiz formülüyle 
+        buluşarak benzersiz bir tat deneyimi yaratıyor.
+      </p>
+
+      <div class="features">
+        <div class="feature fade-in">
+          <div class="feature-icon">🌿</div>
+          <h3 class="feature-title">Doğal Aroma</h3>
+          <p class="feature-text">Gerçek Madagascar vanilyası ile doğal lezzet.</p>
+        </div>
+        <div class="feature fade-in">
+          <div class="feature-icon">💎</div>
+          <h3 class="feature-title">Premium Kalite</h3>
+          <p class="feature-text">Her kutuda tutarlı, yüksek kalite standart.</p>
+        </div>
+        <div class="feature fade-in">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title">Dengeli Tat</h3>
+          <p class="feature-text">Ne çok tatlı, ne çok sert. Mükemmel denge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC -->
+  <section class="cinematic">
+    <div class="cinematic-content">
+      <p class="cinematic-quote fade-in">
+        "Hayat <span class="gold">pürüzsüz</span> olduğunda daha güzel. 
+        Tıpkı bir yudum <span class="gold">Coca-Cola Vanilla</span> gibi."
+      </p>
+      <p class="cinematic-author fade-in">— Taste the Feeling</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title fade-in">
+        Hemen <span class="vanilla">Tadına</span> Bak
+      </h2>
+      <p class="cta-text fade-in">
+        En yakın marketten veya online mağazadan Coca-Cola Vanilla'yı keşfet. 
+        İlk yudumda farkı hissedeceksin.
+      </p>
+      <div class="cta-buttons fade-in">
+        <a href="#" class="btn-primary">
+          🛒 Satın Al
+        </a>
+        <a href="#" class="btn-secondary">
+          📍 Mağaza Bul
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span class="red">Coca-Cola</span> Vanilla
+    </div>
+    <p class="footer-text">© 2025 The Coca-Cola Company. Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script>
+    // Scroll animasyonları
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
